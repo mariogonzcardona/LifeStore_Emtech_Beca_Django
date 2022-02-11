@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+{% block title %}Reportes{% endblock %}
+{%block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Parametros de BD</h4>
+                <p class="card-category">Worckspace e Instancias</p>
+            </div>
+            <div class="card-body">
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <a href="{% url 'workspace' %}" class="nav-link"><i class="material-icons addCatalog">arrow_back</i></a>
+                    </div>
+                    <div class="row">      
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Username</label>
+                                <input name="wUsername" type="text" class="form-control" readonly value="{{ request.user.username }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Email address</label>
+                                <input name="wEmail" type="email" class="form-control" readonly value="{{ request.user.email }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Server Name/IP</label>
+                                <input name="wServername" type="text" class="form-control" value="{{ servername }}">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Puerto</label>
+                                <input name="wPort" type="text" class="form-control"  value="{{ port }}">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Usuario</label>
+                                <input name="wUserDB" type="text" class="form-control"  value="{{ wUser }}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Contraseña</label>
+                                <input name="wPassword" type="password" class="form-control"  value="{{ password }}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="select">Seleccion de BD</label>
+                                <!-- <label class="bmd-label-floating">Seleccion de BD</label> -->
+                                <select name="wDBFormat" class="form-control selectpicker" data-style="btn btn-link" value="{{formatDB}}">
+                                    <option selected>{{formatDB}}</option>
+                                    <option value="SQL">SQL</option>
+                                    <option value="MySQL">MySQL</option>
+                                    <option value="Oracle">Oracle</option>
+                                    <option value="PostgreSQL">PostgreSQL</option>
+                                </select>
+                              </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Nombre de Workspace</label>
+                                <input name="wName" type="text" class="form-control" value="{{ workspaceName }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="select">Permitir la Modificación de Catalogos</label>
+                                <!-- <label class="bmd-label-floating">Seleccion de BD</label> -->
+                                <select name="wcanBeModified" class="form-control selectpicker" data-style="btn btn-link" value="{{canBeModified}}">
+                                    <option selected>{{canBeModified}}</option>
+                                    <option value="False">False</option>
+                                    <option value="True">True</option>
+                                </select>
+                              </div>
+                        </div>
+                    </div>
+                        <!-- <button name="editWorkspace" type="submit" class="btn btn-primary pull-right">Actualizar Workspace</button> -->
+                        <a onclick="editWorkspace({{id}})" id="addWorkspace" href="#" class="btn btn-primary pull-right">Actualizar Workspace</a>
+                        <!-- <a name="editWorkspace" onclick="editWorkspace({{id}})" href="#" class="btn btn-primary pull-right">Actualizar Workspace</a> -->
+                        <div class="clearfix"></div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{%endblock%}

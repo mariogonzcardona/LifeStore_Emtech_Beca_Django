@@ -1,0 +1,165 @@
+{% extends 'core/base.html' %}
+{% block title %}Punto 2{% endblock %}
+<!-- Inicio de contenido -->
+{%block content %}
+
+<!-- Specific Page CSS goes HERE  -->
+{%load static%}
+{% block stylesheets %}
+<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
+{% endblock stylesheets %}
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">
+                                <h4 class="card-title">Productos Por Reseñas:</h4>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <!-- Por Productos -->
+                        <div class="tab-pane active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Productos con Mejores Reseñas</h2>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="example" class="table table-hover" style="width:100%">
+                                        <thead class=" text-primary">
+                                            <th>id_product</th>
+                                            <th>sales</th>
+                                            <th>price</th>
+                                            <th>category</th>
+                                            <th>stock</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Tesla</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>@tesla</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Productos con Peores Reseñas</h2>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="example" class="table table-hover" style="width:100%">
+                                        <thead class=" text-primary">
+                                            <th>id_product</th>
+                                            <th>sales</th>
+                                            <th>price</th>
+                                            <th>category</th>
+                                            <th>stock</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Tesla</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>@tesla</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{%endblock%}
+<!-- Fin de contenido -->
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'core/js/jquery-3.5.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'core/js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'core/js/dataTables.bootstrap5.min.js' %}"></script>
+<script>
+    var table = $('.table').DataTable({
+        "lengthMenu": [5, 10, 15, 20],
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar  _MENU_  Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        "columns": [
+            { "width": "15%" },
+            { "width": "15%" },
+            { "width": "15%" },
+            { "width": "10%" },
+            { "width": "15%" },
+        ]
+    });
+</script>
+{% endblock javascripts %}

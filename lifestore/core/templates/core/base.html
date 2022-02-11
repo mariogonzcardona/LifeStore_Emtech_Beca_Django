@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>{% block title %}{% endblock %} | {{request.user}}</title>
+    {%load static%}
+
+    <!-- Icono -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'core/img/favicon.ico' %}"/>
+
+    <!-- Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="/static/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+
+    <!-- <link href="{% static 'core/css/normalize.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/style.css' %}" rel="stylesheet"> -->
+    
+    <!-- Specific Page CSS goes HERE  -->
+    {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body>
+    {% include 'includes/sidebar.html' %}
+    <div class="main-panel bg">
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="container-fluid">
+                {% block content %}{% endblock content %}  
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap y Javascripts -->
+    <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'core/js/app.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <!-- Specific Page JS goes HERE  -->
+     {% block javascripts %}{% endblock javascripts %}
+</body>
+
+</html>
