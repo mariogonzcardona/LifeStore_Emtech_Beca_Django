@@ -1,11 +1,13 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render,redirect
+from django.views.decorators.csrf import csrf_exempt
 from .models import Product,Sale,Search
 import pandas as pd
 import calendar
 import json
 
 # Create your views here.
+@csrf_exempt
 def point_1_1(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:
@@ -22,6 +24,7 @@ def point_1_1(request):
     # En otro caso redireccionamos al login
     return redirect('/login/')
 
+@csrf_exempt
 def point_1_2(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:
@@ -36,6 +39,7 @@ def point_1_2(request):
     # En otro caso redireccionamos al login
     return redirect('/login/')
 
+@csrf_exempt
 def point_2(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:  
@@ -52,6 +56,7 @@ def point_2(request):
     # En otro caso redireccionamos al login
     return redirect('/login/')
 
+@csrf_exempt
 def point_3_1(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:  
@@ -67,6 +72,7 @@ def point_3_1(request):
     # En otro caso redireccionamos al login
     return redirect('/login/')
 
+@csrf_exempt
 def point_3_2(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:  
@@ -82,6 +88,7 @@ def point_3_2(request):
     # En otro caso redireccionamos al login
     return redirect('/login/')
 
+@csrf_exempt
 def point_3_3(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:  
