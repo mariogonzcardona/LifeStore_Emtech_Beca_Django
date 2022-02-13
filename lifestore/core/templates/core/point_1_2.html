@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block title %}Punto 2{% endblock %}
+{% block title %}Punto 1{% endblock %}
 <!-- Inicio de contenido -->
 {%block content %}
 
@@ -7,6 +7,7 @@
 {%load static%}
 {% block stylesheets %}
 <link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- <link href="{% static 'core/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet"> -->
 {% endblock stylesheets %}
 
 
@@ -19,82 +20,79 @@
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
                             <span class="nav-tabs-title">
-                                <h4 class="card-title">Productos con Mejor y Peor Reseña:</h4>
+                                <h4 class="card-title">Productos Con Mayores Busquedas y Ventas:</h4>
                             </span>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#by_categories" data-toggle="tab">
+                                        <i class="material-icons"><span
+                                                class="material-icons-outlined">style</span></i>Por Categorias
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <!-- Por Productos -->
-                        <div class="tab-pane active" >
-                            <!-- Productos con mayores Ventas -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2>Productos con Mejores Reseñas</h2>
+                        <div class="tab-pane active" id="by_categories">
+                            <div class="row" style="padding-bottom: 2rem">
+                                <div class="col-md-6">
+                                    <label class="bmd-label-floating">Selecciona una Categoria</label>
+                                    <select onchange="getDFByCategory()" id="selectCategoryByName" class="form-control"
+                                        name="delimiter">
+                                        <option disabled selected>Categoria Producto</option>
+                                        {% for c in category_list %}
+                                        <option value="{{c}}">{{c}}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                             </div>
-                            <hr>
-                            <!-- Tabla de Contenido -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table id="best_reviews" class="table table-hover" width=100% >
-                                        <thead>
-                                            <tr>
-                                                <th>Id_product</th>
-                                                <th>Name</th>
-                                                <th>Score_avg</th>                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% if df_score_max_res %}
-                                            {% for i in df_score_max_res %}
-                                            <tr>
-                                                <td>{{i.id_product}}</td>
-                                                <td>{{i.name}}</td>
-                                                <td>{{i.score_avg}}</td>
-                                            </tr>
-                                            {% endfor %}
-                                            {% endif %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
                             <hr>
 
-                            <!-- Productos con Peores Reseñas -->
+                            <!-- Productos con menores Ventas por Categoria -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Productos con Peores Reseñas</h2>
+                                    <h2>Productos con menores Ventas por Categoria</h2>
                                 </div>
                             </div>
                             <hr>
-                            <!-- Tabla de Contenido -->
+                            <table id="sales_table" class="table table-hover" width=100%>
+                                <thead>
+                                    <tr>
+                                        <th>Id_product</th>
+                                        <th>Name</th>
+                                        <th>Sales</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <!-- Productos con menores Búsquedas por Categoria-->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table id="worst_reviews" class="table table-hover" width=100% >
-                                        <thead>
-                                            <tr>
-                                                <th>Id_product</th>
-                                                <th>Name</th>
-                                                <th>Score_avg</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% if df_score_min_res %}
-                                            {% for i in df_score_min_res %}
-                                            <tr>
-                                                <td>{{i.id_product}}</td>
-                                                <td>{{i.name}}</td>
-                                                <td>{{i.score_avg}}</td>
-                                            </tr>
-                                            {% endfor %}
-                                            {% endif %}
-                                        </tbody>
-                                    </table>
+                                    <h2>Productos con menores Busquedas por Categoria</h2>
                                 </div>
                             </div>
+                            <hr>
+                            <table id="searches_table" class="table table-hover" width=100%>
+                                <thead>
+                                    <tr>
+                                        <th>Id_product</th>
+                                        <th>Name</th>
+                                        <th>Searches</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -110,12 +108,11 @@
 
 {% block javascripts %}
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-<script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $('#best_reviews').DataTable({
+    var sales_table=$('#sales_table').DataTable({
             columnDefs: [{
                 targets: 1,
                 render: function (data, type, row) {
@@ -147,12 +144,13 @@
             { "width": "15%" },
             { "width": "35%" },
             { "width": "10%" },
+            { "width": "15%" },
+            { "width": "15%" },
+            { "width": "10%" },
         ]
-        });
     });
 
-    $(document).ready(function () {
-        $('#worst_reviews').DataTable({
+    var searches_table=$('#searches_table').DataTable({
             columnDefs: [{
                 targets: 1,
                 render: function (data, type, row) {
@@ -184,9 +182,10 @@
             { "width": "15%" },
             { "width": "35%" },
             { "width": "10%" },
+            { "width": "15%" },
+            { "width": "15%" },
+            { "width": "10%" },
         ]
-        });
     });
-
 </script>
 {% endblock javascripts %}

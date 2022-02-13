@@ -34,7 +34,7 @@ class Sale (models.Model):
     id_sale = models.IntegerField(primary_key=True,verbose_name="ID Venta")
     id_product=models.IntegerField(verbose_name="ID Producto")
     score=models.IntegerField(verbose_name="Puntuacion",validators=[MinValueValidator(1), MaxValueValidator(5)])
-    date=models.DateTimeField(auto_now_add=True,verbose_name='Fecha de Venta')
+    date=models.CharField(max_length=11,verbose_name='Fecha de Venta')
     refund=models.IntegerField(verbose_name="Devolucion",validators=[MinValueValidator(0), MaxValueValidator(1)])
     
     #Metadata

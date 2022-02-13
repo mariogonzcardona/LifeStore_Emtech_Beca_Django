@@ -10,18 +10,26 @@
   <div class="sidebar-wrapper">
     <ul class="nav">
       <!-- HOME -->
-      <li class="nav-item {% if 'home' == segment %} active {% endif %}">
+      <!-- <li class="nav-item {% if 'home' == segment %} active {% endif %}">
         <a class="nav-link" href="/">
           <i class="material-icons">dashboard</i>
           <p>Dashboard</p>
         </a>
+      </li> -->
+
+      <!-- Punto 1_1 -->
+      <li class="nav-item {% if 'point_1_1' == segment %} active {% endif %}">
+        <a class="nav-link" href="{% url 'point_1_1' %}">
+          <i class="material-icons">filter_5</i>
+          <p>Punto 1.1</p>
+        </a>
       </li>
 
-      <!-- Punto 1 -->
-      <li class="nav-item {% if 'point_1' == segment %} active {% endif %}">
-        <a class="nav-link" href="{% url 'point_1' %}">
+      <!-- Punto 1_2 -->
+      <li class="nav-item {% if 'point_1_2' == segment %} active {% endif %}">
+        <a class="nav-link" href="{% url 'point_1_2' %}">
           <i class="material-icons">filter_5</i>
-          <p>Punto 1</p>
+          <p>Punto 1.2</p>
         </a>
       </li>
       <!-- Punto 2 -->
@@ -32,11 +40,27 @@
         </a>
       </li>
 
-      <!-- Punto 3 -->
-      <li class="nav-item {% if 'point_3' == segment %} active {% endif %}">
-        <a class="nav-link" href="{% url 'point_3' %}">
+      <!-- Punto 3_1 -->
+      <li class="nav-item {% if 'point_3_1' == segment %} active {% endif %}">
+        <a class="nav-link" href="{% url 'point_3_1' %}">
           <i class="material-icons">monetization_on</i>
-          <p>Punto 3</p>
+          <p>Punto 3.1</p>
+        </a>
+      </li>
+
+      <!-- Punto 3_2 -->
+      <li class="nav-item {% if 'point_3_2' == segment %} active {% endif %}">
+        <a class="nav-link" href="{% url 'point_3_2' %}">
+          <i class="material-icons">monetization_on</i>
+          <p>Punto 3.2</p>
+        </a>
+      </li>
+
+      <!-- Punto 3_3 -->
+      <li class="nav-item {% if 'point_3_3' == segment %} active {% endif %}">
+        <a class="nav-link" href="{% url 'point_3_3' %}">
+          <i class="material-icons">monetization_on</i>
+          <p>Punto 3.3</p>
         </a>
       </li>
     

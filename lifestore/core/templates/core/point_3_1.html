@@ -1,0 +1,123 @@
+{% extends 'core/base.html' %}
+{% block title %}Punto 3{% endblock %}
+<!-- Inicio de contenido -->
+{%block content %}
+
+<!-- Specific Page CSS goes HERE  -->
+{%load static%}
+{% load humanize %}
+{% block stylesheets %}
+<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
+{% endblock stylesheets %}
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">
+                                <h4 class="card-title">Total de ingresos y ventas promedio mensuales:</h4>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <!-- Total de ingresos y ventas promedio mensuales -->
+                        <div class="tab-pane active" >
+                            <!-- Ventas por mes -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Ingresos y Ventas promedio por mes</h2>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Tabla de Contenido -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="income_result" class="table table-hover" width=100% >
+                                        <thead>
+                                            <tr>
+                                                <th>Month</th>
+                                                <th>Total_revenue</th>
+                                                <th>Avg_sales</th>
+                                                <th>Total_sales</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if data_total %}
+                                            {% for i in data_total %}
+                                            <tr>
+                                                <td>{{i.month}}</td>
+                                                <td>$ {{i.total_revenue|intcomma }}</td>
+                                                <td>$ {{i.avg_sales|intcomma }}</td>
+                                                <td>{{i.total_sales}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+{%endblock%}
+<!-- Fin de contenido -->
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+<script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#income_result').DataTable({
+            columnDefs: [{
+                targets: 1,
+                render: function (data, type, row) {
+                    return data.substr(0, 40);
+                }
+            }],
+            "lengthMenu": [5, 10, 15, 20],
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar  _MENU_  Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            "columns": [
+            { "width": "20%" },
+            { "width": "20%" },
+            { "width": "20%" },
+            { "width": "20%" },
+        ]
+        });
+    });
+</script>
+{% endblock javascripts %}

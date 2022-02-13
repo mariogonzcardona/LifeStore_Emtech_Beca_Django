@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block title %}Punto 2{% endblock %}
+{% block title %}Punto 1{% endblock %}
 <!-- Inicio de contenido -->
 {%block content %}
 
@@ -19,40 +19,55 @@
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
                             <span class="nav-tabs-title">
-                                <h4 class="card-title">Productos con Mejor y Peor Reseña:</h4>
+                                <h4 class="card-title">Productos con Mayores Busquedas y Ventas:</h4>
                             </span>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#by_products" data-toggle="tab">
+                                        <i class="material-icons"><span
+                                                class="material-icons-outlined">style</span></i>Por Productos
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <!-- Por Productos -->
-                        <div class="tab-pane active" >
+                        <div class="tab-pane active" id="by_products">
                             <!-- Productos con mayores Ventas -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Productos con Mejores Reseñas</h2>
+                                    <h2>Productos con mayores Ventas</h2>
                                 </div>
                             </div>
                             <hr>
                             <!-- Tabla de Contenido -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table id="best_reviews" class="table table-hover" width=100% >
+                                    <table id="sales_table" class="table table-hover" width=100% >
                                         <thead>
                                             <tr>
                                                 <th>Id_product</th>
                                                 <th>Name</th>
-                                                <th>Score_avg</th>                                                
+                                                <th>Sales</th>
+                                                <th>Price</th>
+                                                <th>Category</th>
+                                                <th>Stock</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% if df_score_max_res %}
-                                            {% for i in df_score_max_res %}
+                                            {% if data_sales %}
+                                            {% for i in data_sales %}
                                             <tr>
                                                 <td>{{i.id_product}}</td>
                                                 <td>{{i.name}}</td>
-                                                <td>{{i.score_avg}}</td>
+                                                <td>{{i.sales}}</td>
+                                                <td>{{i.price}}</td>
+                                                <td>{{i.category}}</td>
+                                                <td>{{i.stock}}</td>
                                             </tr>
                                             {% endfor %}
                                             {% endif %}
@@ -63,31 +78,37 @@
 
                             <hr>
 
-                            <!-- Productos con Peores Reseñas -->
+                            <!-- Productos con mayores Busquedas -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Productos con Peores Reseñas</h2>
+                                    <h2>Productos con mayores Busquedas</h2>
                                 </div>
                             </div>
                             <hr>
                             <!-- Tabla de Contenido -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table id="worst_reviews" class="table table-hover" width=100% >
+                                    <table id="searches_table" class="table table-hover" width=100% >
                                         <thead>
                                             <tr>
                                                 <th>Id_product</th>
                                                 <th>Name</th>
-                                                <th>Score_avg</th>
+                                                <th>Searches</th>
+                                                <th>Price</th>
+                                                <th>Category</th>
+                                                <th>Stock</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% if df_score_min_res %}
-                                            {% for i in df_score_min_res %}
+                                            {% if data_searches %}
+                                            {% for i in data_searches %}
                                             <tr>
                                                 <td>{{i.id_product}}</td>
                                                 <td>{{i.name}}</td>
-                                                <td>{{i.score_avg}}</td>
+                                                <td>{{i.searches}}</td>
+                                                <td>{{i.price}}</td>
+                                                <td>{{i.category}}</td>
+                                                <td>{{i.stock}}</td>
                                             </tr>
                                             {% endfor %}
                                             {% endif %}
@@ -115,7 +136,7 @@
 <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function () {
-        $('#best_reviews').DataTable({
+        $('#sales_table').DataTable({
             columnDefs: [{
                 targets: 1,
                 render: function (data, type, row) {
@@ -147,12 +168,15 @@
             { "width": "15%" },
             { "width": "35%" },
             { "width": "10%" },
+            { "width": "15%" },
+            { "width": "15%" },
+            { "width": "10%" },
         ]
         });
     });
 
     $(document).ready(function () {
-        $('#worst_reviews').DataTable({
+        $('#searches_table').DataTable({
             columnDefs: [{
                 targets: 1,
                 render: function (data, type, row) {
@@ -183,6 +207,9 @@
             "columns": [
             { "width": "15%" },
             { "width": "35%" },
+            { "width": "10%" },
+            { "width": "15%" },
+            { "width": "15%" },
             { "width": "10%" },
         ]
         });
