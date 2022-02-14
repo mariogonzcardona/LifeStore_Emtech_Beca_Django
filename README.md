@@ -69,11 +69,18 @@ password: LifeStore01.
 Se implemento un sistema de menu vertical para los diferentes puntos del proyecto, estan distribuidos de la siguiente manera:
 
 > Punto 1.1: Dos tablas con Productos con Mayores Ventas y Busquedas.
+
 > Punto 1.2: Dos tablas con Productos con Menores Ventas y Busquedas por categoria.
+
 > Punto 2: Dos tablas con Productos con Mejores y Peores reseñas.
+
 > Punto 3.1: Una tabla del Total de ingresos y ventas promedio mensuales.
+
 > Punto 3.2: Total de Ingresos por Año.
+
 > Punto 3.3: Meses con mayores ventas en el año 2020.
+
+
 
 ![SideBar](https://github.com/mariogonzcardona/LifeStore_Emtech_Beca_Django/blob/main/Fotos/Sidebar.png?raw=true)
 
