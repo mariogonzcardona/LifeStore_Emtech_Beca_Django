@@ -100,7 +100,7 @@ Para el punto 3.3 Total de de ventas para los primeros 5 meses con mayores venta
 #### _Para la sección de Administrador :_
 [http://lifestoreapp.pythonanywhere.com/admin/](http://lifestoreapp.pythonanywhere.com/admin/)
 
-Es necesario ingresar con e siguiente acceso para poder agregar mas datos para, lifestore_products, lifestore_searches, lifestore_sales.
+Es necesario ingresar con el siguiente acceso para poder agregar mas datos para, lifestore_products, lifestore_searches, lifestore_sales.
 
 ```sh
 user: mario
